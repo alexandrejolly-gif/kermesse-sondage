@@ -25,6 +25,10 @@ export default function SlotCol({ slot, value, onChange, ouiCount, total }) {
           textAlign: "center",
           borderBottom: `1px solid ${active ? active.border : T.border}`,
           background: active ? active.bg + "99" : "white",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
         }}
       >
         <div style={{ fontWeight: 800, fontSize: "0.7rem", color: T.text, lineHeight: 1.3 }}>
@@ -35,7 +39,7 @@ export default function SlotCol({ slot, value, onChange, ouiCount, total }) {
             {slot.sub}
           </div>
         )}
-        <div style={{ marginTop: "0.3rem" }}>
+        <div style={{ marginTop: "auto", paddingTop: "0.3rem" }}>
           <span
             style={{
               fontSize: "0.68rem",

@@ -129,7 +129,15 @@ export default function App() {
 
   return (
     <div
-      style={{ minHeight: "100vh", background: T.bg, fontFamily: T.font, color: T.text }}
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        background: T.bg,
+        fontFamily: T.font,
+        color: T.text,
+      }}
     >
       <Header
         cfg={cfg}
@@ -139,41 +147,50 @@ export default function App() {
       />
       <main
         style={{
-          maxWidth: 960,
-          margin: "0 auto",
-          padding: "1.25rem 0.9rem 3rem",
+          flex: 1,
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch",
         }}
       >
-        {view === "vote" && (
-          <VoteView
-            cfg={cfg}
-            responses={responses}
-            refreshResponses={fetchResponses}
-          />
-        )}
-        {view === "results" && (
-          <ResultsView cfg={cfg} responses={responses} />
-        )}
-        {view === "admin" && (
-          <AdminView
-            cfg={cfg}
-            responses={responses}
-            saveCfg={saveCfg}
-            deleteResponse={deleteResponse}
-            resetResponses={resetResponses}
-          />
-        )}
+        <div
+          style={{
+            maxWidth: 960,
+            margin: "0 auto",
+            padding: "1.25rem 0.9rem 1.5rem",
+          }}
+        >
+          {view === "vote" && (
+            <VoteView
+              cfg={cfg}
+              responses={responses}
+              refreshResponses={fetchResponses}
+            />
+          )}
+          {view === "results" && (
+            <ResultsView cfg={cfg} responses={responses} />
+          )}
+          {view === "admin" && (
+            <AdminView
+              cfg={cfg}
+              responses={responses}
+              saveCfg={saveCfg}
+              deleteResponse={deleteResponse}
+              resetResponses={resetResponses}
+            />
+          )}
+        </div>
       </main>
       <footer
         style={{
           textAlign: "center",
-          padding: "1rem",
+          padding: "0.5rem",
           color: T.hint,
-          fontSize: "0.73rem",
+          fontSize: "0.7rem",
           borderTop: `1px solid ${T.border}`,
+          flexShrink: 0,
         }}
       >
-        🎪 Sondage Kermesse
+        {cfg?.icon || "🎪"} Sondage Kermesse
       </footer>
     </div>
   );

@@ -7,14 +7,39 @@ export default function Header({ cfg, view, setView, respCount }) {
     { id: "admin", label: "⚙️ Admin" },
   ];
 
+  const hasImage = !!cfg?.header_image;
+
   return (
     <header
       style={{
         background: "linear-gradient(135deg, #F97316 0%, #FB923C 100%)",
         boxShadow: "0 4px 20px rgba(249,115,22,0.28)",
+        position: "relative",
+        overflow: "hidden",
+        flexShrink: 0,
       }}
     >
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "1.1rem 1rem 0" }}>
+      {hasImage && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${cfg.header_image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+      )}
+      {hasImage && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(135deg, rgba(249,115,22,0.75) 0%, rgba(251,146,60,0.7) 100%)",
+          }}
+        />
+      )}
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "1.1rem 1rem 0", position: "relative", zIndex: 1 }}>
         <h1
           style={{
             fontSize: "clamp(1.15rem, 4vw, 1.5rem)",

@@ -28,6 +28,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
   const [newRole, setNewRole] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [icon, setIcon] = useState("🎪");
+  const [headerImage, setHeaderImage] = useState("");
   const [flash, setFlash] = useState("");
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
       setSlots([...cfg.slots]);
       setRoles([...(cfg.roles || [])]);
       setIcon(cfg.icon || "🎪");
+      setHeaderImage(cfg.header_image || "");
     }
   }, [unlocked, cfg]);
 
@@ -72,6 +74,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
       slots,
       roles,
       icon,
+      header_image: headerImage.trim(),
       admin_password: newPwd.trim() || cfg.admin_password,
     });
     if (newPwd.trim()) setNewPwd("");
@@ -434,6 +437,56 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
               rows={3}
               style={{ ...inputBase(), resize: "vertical" }}
             />
+          </div>
+          <div style={{ marginBottom: "0.8rem" }}>
+            <label style={lbl}>Image de fond du bandeau (URL)</label>
+            <input
+              value={headerImage}
+              onChange={(e) => setHeaderImage(e.target.value)}
+              placeholder="https://exemple.com/image.jpg"
+              style={inputBase()}
+            />
+            {headerImage.trim() && (
+              <div
+                style={{
+                  marginTop: "0.4rem",
+                  borderRadius: 9,
+                  overflow: "hidden",
+                  border: `1px solid ${T.border}`,
+                  height: 80,
+                  position: "relative",
+                }}
+              >
+                <img
+                  src={headerImage.trim()}
+                  alt="Aperçu"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  onError={(e) => { e.target.style.display = "none"; }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(135deg, rgba(249,115,22,0.75), rgba(251,146,60,0.7))",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
+                    fontWeight: 900,
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  Aperçu du bandeau
+                </div>
+              </div>
+            )}
+            <p style={{ fontSize: "0.7rem", color: T.hint, marginTop: "0.2rem" }}>
+              Collez l'URL d'une image (hébergée sur Imgur, Google Drive, etc.)
+            </p>
           </div>
           <div style={{ marginBottom: "1rem" }}>
             <label style={lbl}>Nouveau mot de passe admin</label>

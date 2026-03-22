@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     process.env.SUPABASE_SERVICE_ROLE_KEY
   )
 
-  const { title, description, slots, roles, icon, admin_password } = req.body
+  const { title, description, slots, roles, icon, header_image, admin_password } = req.body
 
   const { error } = await supabase
     .from('config')
@@ -18,6 +18,7 @@ export default async function handler(req, res) {
       slots,
       roles,
       icon,
+      header_image,
       admin_password,
       updated_at: new Date().toISOString(),
     })

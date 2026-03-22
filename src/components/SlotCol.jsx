@@ -35,7 +35,7 @@ export default function SlotCol({ slot, value, onChange, ouiCount, total }) {
           {slot.label}
         </div>
         {slot.sub && (
-          <div style={{ fontWeight: 900, fontSize: "0.82rem", color: active ? active.col : T.primary }}>
+          <div style={{ fontWeight: 900, fontSize: "0.82rem", color: active ? active.col : T.primaryDk }}>
             {slot.sub}
           </div>
         )}

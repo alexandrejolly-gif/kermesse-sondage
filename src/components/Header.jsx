@@ -76,7 +76,7 @@ export default function Header({ cfg, view, setView, respCount }) {
                 fontWeight: view === t.id ? 900 : 600,
                 fontSize: "0.8rem",
                 background: view === t.id ? T.bg : "rgba(255,255,255,0.22)",
-                color: view === t.id ? T.primary : "white",
+                color: view === t.id ? T.primaryDk : "white",
                 whiteSpace: "nowrap",
                 flexShrink: 0,
               }}

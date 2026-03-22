@@ -157,28 +157,6 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: compact ? "0.4rem" : "0.8rem" }}>
-      {responses.length > 0 && (
-        <div
-          style={{
-            background: T.primaryBg,
-            borderRadius: compact ? 8 : 10,
-            border: "1px solid #FED7AA",
-            padding: compact ? "0.35rem 0.6rem" : "0.6rem 0.9rem",
-            fontSize: compact ? "0.72rem" : "0.8rem",
-            fontWeight: 700,
-            color: T.primaryDk,
-            display: "flex",
-            alignItems: "center",
-            gap: "0.4rem",
-          }}
-        >
-          <span>👀</span>
-          <span>
-            {responses.length} réponse{responses.length > 1 ? "s" : ""} — temps réel
-          </span>
-        </div>
-      )}
-
       <div style={card(compact ? { padding: "0.65rem" } : {})}>
         <div
           style={{
@@ -189,7 +167,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         >
           <div>
             <label style={lbl}>
-              {compact ? "Nom / Enfant (Classe) *" : "Prénom et nom du parent / Prénom de l'enfant (Classe) *"}
+              Prénom et nom du parent / Prénom de l'enfant (Classe) *
             </label>
             <input
               value={name}

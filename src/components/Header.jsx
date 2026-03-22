@@ -56,17 +56,17 @@ export default function Header({ cfg, view, setView, respCount }) {
             fontWeight: 900,
             color: "white",
             lineHeight: 1.2,
-            marginBottom: compact ? "0.1rem" : "0.2rem",
+            marginBottom: "0.2rem",
           }}
         >
           {cfg?.icon || "🎪"} {cfg?.title}
         </h1>
-        {!compact && cfg?.description && (
+        {cfg?.description && (
           <p
             style={{
-              fontSize: "0.8rem",
+              fontSize: compact ? "0.68rem" : "0.8rem",
               color: "rgba(255,255,255,0.85)",
-              marginBottom: "0.75rem",
+              marginBottom: compact ? "0.5rem" : "0.75rem",
             }}
           >
             {cfg.description}

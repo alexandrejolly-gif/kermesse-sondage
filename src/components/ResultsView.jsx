@@ -1,6 +1,8 @@
-import { T, card, optFor } from "../styles/theme";
+import { T, card, optFor, useCompact } from "../styles/theme";
 
 export default function ResultsView({ cfg, responses }) {
+  const compact = useCompact();
+
   if (responses.length === 0)
     return (
       <div style={{ ...card(), textAlign: "center", padding: "2.5rem" }}>
@@ -17,24 +19,24 @@ export default function ResultsView({ cfg, responses }) {
     responses.filter((r) => (r.roles || []).includes(rid)).length;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: compact ? "0.5rem" : "1rem" }}>
       <div
         style={{
           ...card(),
-          padding: "0.8rem 1rem",
+          padding: compact ? "0.5rem 0.7rem" : "0.8rem 1rem",
           display: "flex",
           alignItems: "center",
-          gap: "0.6rem",
+          gap: compact ? "0.4rem" : "0.6rem",
           width: "fit-content",
         }}
       >
-        <span style={{ fontSize: "1.2rem" }}>👥</span>
+        <span style={{ fontSize: compact ? "1rem" : "1.2rem" }}>👥</span>
         <div>
-          <div style={{ fontSize: "1.3rem", fontWeight: 900, lineHeight: 1 }}>
+          <div style={{ fontSize: compact ? "1.05rem" : "1.3rem", fontWeight: 900, lineHeight: 1 }}>
             {responses.length}
           </div>
           <div
-            style={{ fontSize: "0.7rem", color: T.muted, fontWeight: 600 }}
+            style={{ fontSize: compact ? "0.62rem" : "0.7rem", color: T.muted, fontWeight: 600 }}
           >
             participant·e·s
           </div>
@@ -58,18 +60,18 @@ export default function ResultsView({ cfg, responses }) {
             style={{
               width: "100%",
               borderCollapse: "collapse",
-              fontSize: "0.82rem",
+              fontSize: compact ? "0.72rem" : "0.82rem",
             }}
           >
             <thead>
               <tr style={{ background: T.primaryBg }}>
                 <th
                   style={{
-                    padding: "0.7rem 1rem",
+                    padding: compact ? "0.45rem 0.5rem" : "0.7rem 1rem",
                     textAlign: "left",
                     fontWeight: 900,
                     borderBottom: `1px solid ${T.border}`,
-                    minWidth: 160,
+                    minWidth: compact ? 90 : 160,
                     position: "sticky",
                     left: 0,
                     background: T.primaryBg,
@@ -82,13 +84,13 @@ export default function ResultsView({ cfg, responses }) {
                   <th
                     key={s.id}
                     style={{
-                      padding: "0.55rem",
+                      padding: compact ? "0.35rem 0.25rem" : "0.55rem",
                       textAlign: "center",
                       fontWeight: 800,
                       borderBottom: `1px solid ${T.border}`,
-                      minWidth: 100,
+                      minWidth: compact ? 65 : 100,
                       borderLeft: `1px solid ${T.border}`,
-                      fontSize: "0.75rem",
+                      fontSize: compact ? "0.62rem" : "0.75rem",
                     }}
                   >
                     <div>{s.label}</div>
@@ -99,9 +101,9 @@ export default function ResultsView({ cfg, responses }) {
               <tr style={{ background: "#FEF9C3" }}>
                 <td
                   style={{
-                    padding: "0.32rem 1rem",
+                    padding: compact ? "0.22rem 0.5rem" : "0.32rem 1rem",
                     fontWeight: 700,
-                    fontSize: "0.73rem",
+                    fontSize: compact ? "0.62rem" : "0.73rem",
                     color: T.muted,
                     borderBottom: `1px solid ${T.border}`,
                     position: "sticky",
@@ -116,7 +118,7 @@ export default function ResultsView({ cfg, responses }) {
                   <td
                     key={s.id}
                     style={{
-                      padding: "0.32rem 0.35rem",
+                      padding: compact ? "0.2rem 0.2rem" : "0.32rem 0.35rem",
                       textAlign: "center",
                       borderBottom: `1px solid ${T.border}`,
                       borderLeft: `1px solid ${T.border}`,
@@ -128,8 +130,8 @@ export default function ResultsView({ cfg, responses }) {
                         color: "#065F46",
                         fontWeight: 900,
                         borderRadius: 99,
-                        padding: "0.08rem 0.45rem",
-                        fontSize: "0.75rem",
+                        padding: compact ? "0.04rem 0.3rem" : "0.08rem 0.45rem",
+                        fontSize: compact ? "0.65rem" : "0.75rem",
                       }}
                     >
                       {cnt(s.id, "oui")}
@@ -141,8 +143,8 @@ export default function ResultsView({ cfg, responses }) {
                           color: "#92400E",
                           fontWeight: 800,
                           borderRadius: 99,
-                          padding: "0.08rem 0.4rem",
-                          fontSize: "0.72rem",
+                          padding: compact ? "0.04rem 0.28rem" : "0.08rem 0.4rem",
+                          fontSize: compact ? "0.6rem" : "0.72rem",
                           marginLeft: 3,
                         }}
                       >
@@ -164,7 +166,7 @@ export default function ResultsView({ cfg, responses }) {
                 >
                   <td
                     style={{
-                      padding: "0.6rem 1rem",
+                      padding: compact ? "0.35rem 0.5rem" : "0.6rem 1rem",
                       fontWeight: 700,
                       position: "sticky",
                       left: 0,
@@ -180,7 +182,7 @@ export default function ResultsView({ cfg, responses }) {
                       <td
                         key={s.id}
                         style={{
-                          padding: "0.4rem 0.3rem",
+                          padding: compact ? "0.25rem 0.2rem" : "0.4rem 0.3rem",
                           textAlign: "center",
                           borderLeft: `1px solid ${T.border}`,
                         }}
@@ -192,8 +194,8 @@ export default function ResultsView({ cfg, responses }) {
                               color: opt.col,
                               fontWeight: 800,
                               borderRadius: 5,
-                              padding: "0.12rem 0.45rem",
-                              fontSize: "0.76rem",
+                              padding: compact ? "0.08rem 0.3rem" : "0.12rem 0.45rem",
+                              fontSize: compact ? "0.66rem" : "0.76rem",
                               display: "inline-block",
                             }}
                           >
@@ -227,10 +229,10 @@ export default function ResultsView({ cfg, responses }) {
           </div>
           <div
             style={{
-              padding: "0.75rem 1rem",
+              padding: compact ? "0.5rem 0.65rem" : "0.75rem 1rem",
               display: "flex",
               flexWrap: "wrap",
-              gap: "0.45rem",
+              gap: compact ? "0.3rem" : "0.45rem",
               borderBottom: `1px solid ${T.border}`,
             }}
           >
@@ -242,17 +244,17 @@ export default function ResultsView({ cfg, responses }) {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "0.35rem",
+                    gap: compact ? "0.25rem" : "0.35rem",
                     background: n > 0 ? T.primaryBg : T.surfaceAlt,
                     border: `1px solid ${n > 0 ? "#FED7AA" : T.border}`,
                     borderRadius: 99,
-                    padding: "0.28rem 0.7rem",
+                    padding: compact ? "0.18rem 0.5rem" : "0.28rem 0.7rem",
                   }}
                 >
                   <span
                     style={{
                       fontWeight: 800,
-                      fontSize: "0.78rem",
+                      fontSize: compact ? "0.65rem" : "0.78rem",
                       color: n > 0 ? T.primaryDk : T.muted,
                     }}
                   >
@@ -261,12 +263,12 @@ export default function ResultsView({ cfg, responses }) {
                   <span
                     style={{
                       fontWeight: 900,
-                      fontSize: "0.75rem",
+                      fontSize: compact ? "0.62rem" : "0.75rem",
                       background: n > 0 ? T.primary : T.border,
                       color: n > 0 ? "white" : T.muted,
                       borderRadius: 99,
-                      padding: "0.05rem 0.42rem",
-                      minWidth: 18,
+                      padding: compact ? "0.02rem 0.32rem" : "0.05rem 0.42rem",
+                      minWidth: compact ? 16 : 18,
                       textAlign: "center",
                     }}
                   >
@@ -281,18 +283,18 @@ export default function ResultsView({ cfg, responses }) {
               style={{
                 width: "100%",
                 borderCollapse: "collapse",
-                fontSize: "0.82rem",
+                fontSize: compact ? "0.72rem" : "0.82rem",
               }}
             >
               <thead>
                 <tr style={{ background: T.primaryBg }}>
                   <th
                     style={{
-                      padding: "0.65rem 1rem",
+                      padding: compact ? "0.4rem 0.5rem" : "0.65rem 1rem",
                       textAlign: "left",
                       fontWeight: 900,
                       borderBottom: `1px solid ${T.border}`,
-                      minWidth: 160,
+                      minWidth: compact ? 90 : 160,
                       position: "sticky",
                       left: 0,
                       background: T.primaryBg,
@@ -305,13 +307,13 @@ export default function ResultsView({ cfg, responses }) {
                     <th
                       key={ro.id}
                       style={{
-                        padding: "0.55rem 0.5rem",
+                        padding: compact ? "0.35rem 0.25rem" : "0.55rem 0.5rem",
                         textAlign: "center",
                         fontWeight: 800,
                         borderBottom: `1px solid ${T.border}`,
-                        minWidth: 90,
+                        minWidth: compact ? 60 : 90,
                         borderLeft: `1px solid ${T.border}`,
-                        fontSize: "0.75rem",
+                        fontSize: compact ? "0.62rem" : "0.75rem",
                       }}
                     >
                       {ro.label}
@@ -330,7 +332,7 @@ export default function ResultsView({ cfg, responses }) {
                   >
                     <td
                       style={{
-                        padding: "0.55rem 1rem",
+                        padding: compact ? "0.35rem 0.5rem" : "0.55rem 1rem",
                         fontWeight: 700,
                         position: "sticky",
                         left: 0,
@@ -346,7 +348,7 @@ export default function ResultsView({ cfg, responses }) {
                         <td
                           key={ro.id}
                           style={{
-                            padding: "0.4rem 0.3rem",
+                            padding: compact ? "0.25rem 0.2rem" : "0.4rem 0.3rem",
                             textAlign: "center",
                             borderLeft: `1px solid ${T.border}`,
                           }}

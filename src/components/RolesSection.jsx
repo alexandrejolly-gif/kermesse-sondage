@@ -8,7 +8,7 @@ export default function RolesSection({ roles, selected, onChange }) {
     );
 
   return (
-    <div style={card({ padding: compact ? "0.65rem" : undefined })}>
+    <div style={card(compact ? { padding: "0.65rem" } : {})}>
       <div style={{ marginBottom: compact ? "0.4rem" : "0.75rem" }}>
         <span style={{ fontWeight: 900, fontSize: compact ? "0.82rem" : "0.92rem", color: T.text }}>
           {compact ? "Rôles" : "Préférences de rôles"}

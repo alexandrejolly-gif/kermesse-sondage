@@ -179,7 +179,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         </div>
       )}
 
-      <div style={card({ padding: compact ? "0.65rem" : undefined })}>
+      <div style={card(compact ? { padding: "0.65rem" } : {})}>
         <div
           style={{
             display: "grid",
@@ -219,7 +219,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         </div>
       </div>
 
-      <div style={card({ padding: compact ? "0.65rem" : undefined })}>
+      <div style={card(compact ? { padding: "0.65rem" } : {})}>
         <div
           style={{
             display: "flex",

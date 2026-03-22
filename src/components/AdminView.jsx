@@ -90,27 +90,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
         >
           🔒 Administration
         </h2>
-        <p
-          style={{
-            color: T.muted,
-            fontSize: "0.83rem",
-            marginBottom: "1.1rem",
-          }}
-        >
-          Mot de passe par défaut :{" "}
-          <code
-            style={{
-              background: T.primaryBg,
-              padding: "0.1rem 0.35rem",
-              borderRadius: 4,
-              fontWeight: 700,
-              color: T.primaryDk,
-            }}
-          >
-            kermesse2025
-          </code>
-        </p>
-        <label style={lbl}>Mot de passe</label>
+        <label style={{ ...lbl, marginTop: "0.5rem" }}>Mot de passe</label>
         <input
           type="password"
           value={pwd}

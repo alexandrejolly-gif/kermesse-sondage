@@ -21,6 +21,20 @@ export default function App() {
     document.head.appendChild(link);
   }, []);
 
+  // Dynamic favicon based on config icon
+  useEffect(() => {
+    if (!cfg) return;
+    const emoji = cfg.icon || "🎪";
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${emoji}</text></svg>`;
+    let link = document.querySelector("link[rel='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+  }, [cfg?.icon]);
+
   // Fetch config from Supabase
   const fetchConfig = useCallback(async () => {
     const { data, error } = await supabase

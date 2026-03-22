@@ -24,7 +24,7 @@ export default function Header({ cfg, view, setView, respCount }) {
             marginBottom: "0.2rem",
           }}
         >
-          🎪 {cfg?.title}
+          {cfg?.icon || "🎪"} {cfg?.title}
         </h1>
         {cfg?.description && (
           <p

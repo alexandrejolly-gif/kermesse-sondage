@@ -27,6 +27,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
   const [newSlotSub, setNewSlotSub] = useState("");
   const [newRole, setNewRole] = useState("");
   const [newPwd, setNewPwd] = useState("");
+  const [icon, setIcon] = useState("🎪");
   const [flash, setFlash] = useState("");
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
       setDesc(cfg.description);
       setSlots([...cfg.slots]);
       setRoles([...(cfg.roles || [])]);
+      setIcon(cfg.icon || "🎪");
     }
   }, [unlocked, cfg]);
 
@@ -69,6 +71,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
       description: desc,
       slots,
       roles,
+      icon,
       admin_password: newPwd.trim() || cfg.admin_password,
     });
     if (newPwd.trim()) setNewPwd("");
@@ -380,6 +383,41 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
           >
             Paramètres généraux
           </h3>
+          <div style={{ marginBottom: "0.8rem" }}>
+            <label style={lbl}>Icône de l'application</label>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "0.4rem" }}>
+              {["🎪", "🎉", "🎈", "🎊", "🏫", "🎒", "🎠", "🎡", "🎯", "🎨", "🎭", "🎶", "⭐", "🌈", "🎃", "❤️"].map((e) => (
+                <button
+                  key={e}
+                  onClick={() => setIcon(e)}
+                  style={{
+                    fontSize: "1.4rem",
+                    padding: "0.3rem",
+                    width: 42,
+                    height: 42,
+                    borderRadius: 9,
+                    border: `2px solid ${icon === e ? T.primary : T.border}`,
+                    background: icon === e ? T.primaryBg : "white",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {e}
+                </button>
+              ))}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <span style={{ fontSize: "0.76rem", color: T.muted, fontWeight: 600 }}>Ou saisir un emoji :</span>
+              <input
+                value={icon}
+                onChange={(e) => setIcon(e.target.value)}
+                style={{ ...inputBase(), width: 60, textAlign: "center", fontSize: "1.2rem" }}
+                maxLength={2}
+              />
+            </div>
+          </div>
           <div style={{ marginBottom: "0.8rem" }}>
             <label style={lbl}>Titre</label>
             <input

@@ -20,6 +20,7 @@ create table config (
   slots jsonb not null default '[]',
   roles jsonb not null default '[]',
   admin_password text not null default 'kermesse2025',
+  icon text default '🎪',
   updated_at timestamptz default now()
 );
 

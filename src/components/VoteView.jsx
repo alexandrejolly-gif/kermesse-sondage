@@ -114,6 +114,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
       return;
     }
 
+    await refreshResponses();
     setSubmitted(true);
   };
 

@@ -1,29 +1,32 @@
-import { T, card } from "../styles/theme";
+import { T, card, useCompact } from "../styles/theme";
 
 export default function RolesSection({ roles, selected, onChange }) {
+  const compact = useCompact();
   const toggle = (id) =>
     onChange(
       selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id]
     );
 
   return (
-    <div style={card()}>
-      <div style={{ marginBottom: "0.75rem" }}>
-        <span style={{ fontWeight: 900, fontSize: "0.92rem", color: T.text }}>
-          Préférences de rôles
+    <div style={card({ padding: compact ? "0.65rem" : undefined })}>
+      <div style={{ marginBottom: compact ? "0.4rem" : "0.75rem" }}>
+        <span style={{ fontWeight: 900, fontSize: compact ? "0.82rem" : "0.92rem", color: T.text }}>
+          {compact ? "Rôles" : "Préférences de rôles"}
         </span>
-        <span
-          style={{
-            marginLeft: "0.5rem",
-            fontSize: "0.76rem",
-            color: T.muted,
-            fontWeight: 600,
-          }}
-        >
-          · Cochez un ou plusieurs postes qui vous intéressent
-        </span>
+        {!compact && (
+          <span
+            style={{
+              marginLeft: "0.5rem",
+              fontSize: "0.76rem",
+              color: T.muted,
+              fontWeight: 600,
+            }}
+          >
+            · Cochez un ou plusieurs postes qui vous intéressent
+          </span>
+        )}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: compact ? "0.35rem" : "0.5rem" }}>
         {roles.map((role) => {
           const on = selected.includes(role.id);
           return (
@@ -31,13 +34,13 @@ export default function RolesSection({ roles, selected, onChange }) {
               key={role.id}
               onClick={() => toggle(role.id)}
               style={{
-                padding: "0.42rem 0.85rem",
+                padding: compact ? "0.3rem 0.6rem" : "0.42rem 0.85rem",
                 borderRadius: 99,
                 border: `2px solid ${on ? T.primary : T.border}`,
                 background: on ? T.primaryBg : "white",
                 color: on ? T.primaryDk : T.muted,
                 fontWeight: on ? 900 : 600,
-                fontSize: "0.82rem",
+                fontSize: compact ? "0.72rem" : "0.82rem",
                 cursor: "pointer",
                 fontFamily: T.font,
                 transition: "all 0.12s",
@@ -55,8 +58,8 @@ export default function RolesSection({ roles, selected, onChange }) {
       {selected.length > 0 && (
         <div
           style={{
-            marginTop: "0.6rem",
-            fontSize: "0.76rem",
+            marginTop: compact ? "0.35rem" : "0.6rem",
+            fontSize: compact ? "0.68rem" : "0.76rem",
             color: T.primary,
             fontWeight: 700,
           }}

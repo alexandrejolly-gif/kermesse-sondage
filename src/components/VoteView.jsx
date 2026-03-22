@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import SlotCol from "./SlotCol";
 import RolesSection from "./RolesSection";
-import { T, OPT, card, inputBase, lbl, errMsg, btn, uid, isEmail } from "../styles/theme";
+import { T, OPT, card, inputBase, lbl, errMsg, btn, uid, isEmail, useCompact } from "../styles/theme";
 
 export default function VoteView({ cfg, responses, refreshResponses }) {
   const [name, setName] = useState("");
@@ -13,6 +13,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
   const [submitted, setSubmitted] = useState(false);
   const [saving, setSaving] = useState(false);
   const [editingId, setEditingId] = useState(null); // null = new, string = editing existing
+  const compact = useCompact();
 
   // Realtime: listen for changes on responses table
   useEffect(() => {
@@ -155,41 +156,40 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
     );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: compact ? "0.4rem" : "0.8rem" }}>
       {responses.length > 0 && (
         <div
           style={{
             background: T.primaryBg,
-            borderRadius: 10,
+            borderRadius: compact ? 8 : 10,
             border: "1px solid #FED7AA",
-            padding: "0.6rem 0.9rem",
-            fontSize: "0.8rem",
+            padding: compact ? "0.35rem 0.6rem" : "0.6rem 0.9rem",
+            fontSize: compact ? "0.72rem" : "0.8rem",
             fontWeight: 700,
             color: T.primaryDk,
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "0.4rem",
           }}
         >
           <span>👀</span>
           <span>
-            {responses.length} personne{responses.length > 1 ? "s ont" : " a"}{" "}
-            déjà répondu — compteurs en temps réel.
+            {responses.length} réponse{responses.length > 1 ? "s" : ""} — temps réel
           </span>
         </div>
       )}
 
-      <div style={card()}>
+      <div style={card({ padding: compact ? "0.65rem" : undefined })}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "0.75rem",
+            gridTemplateColumns: compact ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: compact ? "0.4rem" : "0.75rem",
           }}
         >
           <div>
             <label style={lbl}>
-              Prénom et nom du parent / Prénom de l'enfant (Classe) *
+              {compact ? "Nom / Enfant (Classe) *" : "Prénom et nom du parent / Prénom de l'enfant (Classe) *"}
             </label>
             <input
               value={name}
@@ -219,26 +219,28 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         </div>
       </div>
 
-      <div style={card()}>
+      <div style={card({ padding: compact ? "0.65rem" : undefined })}>
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: "0.55rem",
+            marginBottom: compact ? "0.35rem" : "0.55rem",
             flexWrap: "wrap",
             gap: "0.4rem",
           }}
         >
-          <span style={{ fontWeight: 900, fontSize: "0.92rem", color: T.text }}>
+          <span style={{ fontWeight: 900, fontSize: compact ? "0.82rem" : "0.92rem", color: T.text }}>
             Disponibilités
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-            <span
-              style={{ fontSize: "0.72rem", color: T.muted, fontWeight: 600 }}
-            >
-              Sans réponse = Non
-            </span>
+            {!compact && (
+              <span
+                style={{ fontSize: "0.72rem", color: T.muted, fontWeight: 600 }}
+              >
+                Sans réponse = Non
+              </span>
+            )}
             <span
               style={{
                 fontSize: "0.73rem",
@@ -271,31 +273,33 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
             </div>
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            gap: "0.6rem",
-            marginBottom: "0.6rem",
-            flexWrap: "wrap",
-          }}
-        >
-          {OPT.map((o) => (
-            <span
-              key={o.v}
-              style={{
-                fontSize: "0.7rem",
-                color: T.muted,
-                fontWeight: 600,
-                display: "flex",
-                alignItems: "center",
-                gap: "0.18rem",
-              }}
-            >
-              <span style={{ color: o.col, fontWeight: 900 }}>{o.icon}</span>
-              {o.label}
-            </span>
-          ))}
-        </div>
+        {!compact && (
+          <div
+            style={{
+              display: "flex",
+              gap: "0.6rem",
+              marginBottom: "0.6rem",
+              flexWrap: "wrap",
+            }}
+          >
+            {OPT.map((o) => (
+              <span
+                key={o.v}
+                style={{
+                  fontSize: "0.7rem",
+                  color: T.muted,
+                  fontWeight: 600,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.18rem",
+                }}
+              >
+                <span style={{ color: o.col, fontWeight: 900 }}>{o.icon}</span>
+                {o.label}
+              </span>
+            ))}
+          </div>
+        )}
         <div
           style={{
             overflowX: "auto",
@@ -306,7 +310,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
           <div
             style={{
               display: "flex",
-              gap: "0.45rem",
+              gap: compact ? "0.3rem" : "0.45rem",
               minWidth: "min-content",
             }}
           >
@@ -318,6 +322,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
                 onChange={(v) => toggle(slot.id, v)}
                 ouiCount={cntOui(slot.id)}
                 total={responses.length}
+                compact={compact}
               />
             ))}
           </div>
@@ -339,8 +344,8 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
           ...btn(T.primary),
           width: "100%",
           justifyContent: "center",
-          padding: "0.72rem",
-          fontSize: "0.9rem",
+          padding: compact ? "0.55rem" : "0.72rem",
+          fontSize: compact ? "0.8rem" : "0.9rem",
           borderRadius: 11,
           opacity: saving ? 0.7 : 1,
         }}
@@ -348,8 +353,8 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         {saving
           ? "Enregistrement…"
           : editingId
-            ? "✏️ Modifier mes disponibilités"
-            : "✓ Soumettre mes disponibilités"}
+            ? compact ? "✏️ Modifier" : "✏️ Modifier mes disponibilités"
+            : compact ? "✓ Soumettre" : "✓ Soumettre mes disponibilités"}
       </button>
     </div>
   );

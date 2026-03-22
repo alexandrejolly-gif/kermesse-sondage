@@ -1,6 +1,8 @@
-import { T } from "../styles/theme";
+import { T, useCompact } from "../styles/theme";
 
 export default function Header({ cfg, view, setView, respCount }) {
+  const compact = useCompact();
+
   const tabs = [
     { id: "vote", label: "📝 Répondre" },
     { id: "results", label: `📊 Résultats${respCount > 0 ? ` (${respCount})` : ""}` },
@@ -39,19 +41,27 @@ export default function Header({ cfg, view, setView, respCount }) {
           }}
         />
       )}
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "1.1rem 1rem 0", position: "relative", zIndex: 1 }}>
+      <div
+        style={{
+          maxWidth: 960,
+          margin: "0 auto",
+          padding: compact ? "0.6rem 0.7rem 0" : "1.1rem 1rem 0",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
         <h1
           style={{
-            fontSize: "clamp(1.15rem, 4vw, 1.5rem)",
+            fontSize: compact ? "1rem" : "clamp(1.15rem, 4vw, 1.5rem)",
             fontWeight: 900,
             color: "white",
             lineHeight: 1.2,
-            marginBottom: "0.2rem",
+            marginBottom: compact ? "0.1rem" : "0.2rem",
           }}
         >
           {cfg?.icon || "🎪"} {cfg?.title}
         </h1>
-        {cfg?.description && (
+        {!compact && cfg?.description && (
           <p
             style={{
               fontSize: "0.8rem",
@@ -62,19 +72,19 @@ export default function Header({ cfg, view, setView, respCount }) {
             {cfg.description}
           </p>
         )}
-        <nav style={{ display: "flex", gap: "0.2rem", overflowX: "auto" }}>
+        <nav style={{ display: "flex", gap: "0.15rem", overflowX: "auto" }}>
           {tabs.map((t) => (
             <button
               key={t.id}
               onClick={() => setView(t.id)}
               style={{
-                padding: "0.38rem 0.85rem",
+                padding: compact ? "0.25rem 0.55rem" : "0.38rem 0.85rem",
                 borderRadius: "7px 7px 0 0",
                 border: "none",
                 cursor: "pointer",
                 fontFamily: T.font,
                 fontWeight: view === t.id ? 900 : 600,
-                fontSize: "0.8rem",
+                fontSize: compact ? "0.7rem" : "0.8rem",
                 background: view === t.id ? T.bg : "rgba(255,255,255,0.22)",
                 color: view === t.id ? T.primaryDk : "white",
                 whiteSpace: "nowrap",

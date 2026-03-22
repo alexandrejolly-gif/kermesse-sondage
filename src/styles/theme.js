@@ -1,3 +1,17 @@
+import { useState, useEffect } from "react";
+
+// Returns true when viewport <= 420px
+export function useCompact() {
+  const [compact, setCompact] = useState(() => window.innerWidth <= 420);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 420px)");
+    const handler = (e) => setCompact(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return compact;
+}
+
 export const T = {
   bg: "#FFFBF0",
   surface: "#FFFFFF",

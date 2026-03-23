@@ -161,7 +161,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: compact ? "1fr 1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
+            gridTemplateColumns: compact ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
             gap: compact ? "0.3rem" : "0.75rem",
           }}
         >

@@ -157,39 +157,39 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: compact ? "0.4rem" : "0.8rem" }}>
-      <div style={card(compact ? { padding: "0.65rem" } : {})}>
+      <div style={card(compact ? { padding: "0.5rem 0.6rem" } : {})}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: compact ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: compact ? "0.4rem" : "0.75rem",
+            gridTemplateColumns: compact ? "1fr 1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: compact ? "0.3rem" : "0.75rem",
           }}
         >
           <div>
-            <label style={lbl}>
-              Prénom et nom du parent / Prénom de l'enfant (Classe) *
+            <label style={{ ...lbl, fontSize: compact ? "0.62rem" : undefined }}>
+              {compact ? "Prénom Nom Parent / Prénom enfant (Classe) *" : "Prénom et nom du parent / Prénom de l'enfant (Classe) *"}
             </label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ex : Marie Dupont / Julia (PS)"
-              style={inputBase(!!errors.name)}
+              placeholder={compact ? "Marie Dupont / Julia (PS)" : "Ex : Marie Dupont / Julia (PS)"}
+              style={{ ...inputBase(!!errors.name), fontSize: compact ? "0.78rem" : undefined, padding: compact ? "0.4rem 0.6rem" : undefined }}
             />
             {errors.name && <p style={errMsg}>{errors.name}</p>}
           </div>
           <div>
-            <label style={lbl}>Email *</label>
+            <label style={{ ...lbl, fontSize: compact ? "0.62rem" : undefined }}>Email *</label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onBlur={checkEmail}
               placeholder="marie@exemple.fr"
               type="email"
-              style={inputBase(!!errors.email)}
+              style={{ ...inputBase(!!errors.email), fontSize: compact ? "0.78rem" : undefined, padding: compact ? "0.4rem 0.6rem" : undefined }}
             />
             {errors.email && <p style={errMsg}>{errors.email}</p>}
             {editingId && (
-              <p style={{ color: "#059669", fontSize: "0.74rem", marginTop: "0.22rem", fontWeight: 700 }}>
+              <p style={{ color: "#059669", fontSize: compact ? "0.65rem" : "0.74rem", marginTop: "0.22rem", fontWeight: 700 }}>
                 ✏️ Réponses retrouvées — modifiez et re-soumettez.
               </p>
             )}
@@ -209,7 +209,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
           }}
         >
           <span style={{ fontWeight: 900, fontSize: compact ? "0.82rem" : "0.92rem", color: T.text }}>
-            Disponibilités
+            📅 Disponibilités
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
             {!compact && (

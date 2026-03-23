@@ -161,7 +161,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: compact ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
+            gridTemplateColumns: "1fr",
             gap: compact ? "0.3rem" : "0.75rem",
           }}
         >
@@ -173,7 +173,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder={compact ? "Marie Dupont / Julia (PS)" : "Ex : Marie Dupont / Julia (PS)"}
-              style={{ ...inputBase(!!errors.name), fontSize: compact ? "0.78rem" : undefined, padding: compact ? "0.4rem 0.6rem" : undefined }}
+              style={inputBase(!!errors.name)}
             />
             {errors.name && <p style={errMsg}>{errors.name}</p>}
           </div>
@@ -185,7 +185,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
               onBlur={checkEmail}
               placeholder="marie@exemple.fr"
               type="email"
-              style={{ ...inputBase(!!errors.email), fontSize: compact ? "0.78rem" : undefined, padding: compact ? "0.4rem 0.6rem" : undefined }}
+              style={inputBase(!!errors.email)}
             />
             {errors.email && <p style={errMsg}>{errors.email}</p>}
             {editingId && (

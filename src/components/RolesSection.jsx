@@ -31,7 +31,7 @@ export default function RolesSection({ roles, selected, onChange, responses }) {
       <div style={{ display: "flex", flexWrap: "wrap", gap: compact ? "0.35rem" : "0.5rem" }}>
         {roles.map((role) => {
           const on = selected.includes(role.id);
-          const count = roleCnt(role.id) + (on ? 1 : 0);
+          const count = roleCnt(role.id);
           return (
             <button
               key={role.id}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import SlotCol from "./SlotCol";
 import RolesSection from "./RolesSection";
-import { T, OPT, card, inputBase, lbl, errMsg, btn, uid, isEmail, useCompact } from "../styles/theme";
+import { T, card, inputBase, lbl, errMsg, btn, uid, isEmail, useCompact } from "../styles/theme";
 
 export default function VoteView({ cfg, responses, refreshResponses }) {
   const [name, setName] = useState("");
@@ -251,33 +251,6 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
             </div>
           </div>
         </div>
-        {!compact && (
-          <div
-            style={{
-              display: "flex",
-              gap: "0.6rem",
-              marginBottom: "0.6rem",
-              flexWrap: "wrap",
-            }}
-          >
-            {OPT.map((o) => (
-              <span
-                key={o.v}
-                style={{
-                  fontSize: "0.7rem",
-                  color: T.muted,
-                  fontWeight: 600,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.18rem",
-                }}
-              >
-                <span style={{ color: o.col, fontWeight: 900 }}>{o.icon}</span>
-                {o.label}
-              </span>
-            ))}
-          </div>
-        )}
         <div
           style={{
             overflowX: "auto",

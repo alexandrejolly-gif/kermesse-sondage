@@ -16,8 +16,8 @@ export default function SlotCol({ slot, value, onChange, ouiCount, total, compac
         transition: "border-color 0.15s, background 0.15s",
         overflow: "hidden",
         minWidth: w,
-        width: w,
-        flexShrink: 0,
+        flex: compact ? `0 0 ${w}px` : `1 0 ${w}px`,
+        maxWidth: compact ? undefined : 140,
       }}
     >
       <div
@@ -48,7 +48,7 @@ export default function SlotCol({ slot, value, onChange, ouiCount, total, compac
               background:
                 ouiCount === 0 ? "#F5F5F4" : ouiCount <= 2 ? "#FEF3C7" : "#D1FAE5",
               color:
-                ouiCount === 0 ? T.hint : ouiCount <= 2 ? "#92400E" : "#065F46",
+                ouiCount === 0 ? "#57534E" : ouiCount <= 2 ? "#92400E" : "#065F46",
               borderRadius: 99,
               padding: compact ? "0.05rem 0.3rem" : "0.08rem 0.42rem",
             }}
@@ -62,6 +62,7 @@ export default function SlotCol({ slot, value, onChange, ouiCount, total, compac
           <button
             key={opt.v}
             onClick={() => onChange(value === opt.v ? undefined : opt.v)}
+            aria-label={`${opt.label} pour ${slot.label}${slot.sub ? " " + slot.sub : ""}`}
             style={{
               width: "100%",
               padding: compact ? "0.32rem 0.15rem" : "0.48rem 0.2rem",

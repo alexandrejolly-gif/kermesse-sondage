@@ -142,6 +142,7 @@ export default function ResultsView({ cfg, responses }) {
                   }}
                 >
                   <td
+                    title={r.name}
                     style={{
                       padding: compact ? "0.35rem 0.5rem" : "0.6rem 1rem",
                       fontWeight: 700,
@@ -149,6 +150,10 @@ export default function ResultsView({ cfg, responses }) {
                       left: 0,
                       background: i % 2 === 0 ? "white" : T.surfaceAlt,
                       zIndex: 1,
+                      maxWidth: compact ? 110 : 200,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     {r.name}
@@ -174,9 +179,10 @@ export default function ResultsView({ cfg, responses }) {
                               padding: compact ? "0.08rem 0.3rem" : "0.12rem 0.45rem",
                               fontSize: compact ? "0.66rem" : "0.76rem",
                               display: "inline-block",
+                              border: opt.v === "peut" ? `1.5px dashed ${opt.border}` : "none",
                             }}
                           >
-                            {opt.icon}
+                            {opt.v === "peut" ? "~" : opt.icon}
                           </span>
                         ) : (
                           <span style={{ color: T.hint }}>—</span>
@@ -308,6 +314,7 @@ export default function ResultsView({ cfg, responses }) {
                     }}
                   >
                     <td
+                      title={r.name}
                       style={{
                         padding: compact ? "0.35rem 0.5rem" : "0.55rem 1rem",
                         fontWeight: 700,
@@ -315,6 +322,10 @@ export default function ResultsView({ cfg, responses }) {
                         left: 0,
                         background: i % 2 === 0 ? "white" : T.surfaceAlt,
                         zIndex: 1,
+                        maxWidth: compact ? 110 : 200,
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
                       }}
                     >
                       {r.name}

@@ -96,6 +96,7 @@ export default function Header({ cfg, view, setView, respCount }) {
           <div style={{ marginLeft: "auto" }}>
             <button
               onClick={() => setView("admin")}
+              title="Administration"
               style={{
                 padding: compact ? "0.25rem 0.45rem" : "0.38rem 0.6rem",
                 borderRadius: "7px 7px 0 0",

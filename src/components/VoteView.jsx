@@ -312,6 +312,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
           roles={cfg.roles}
           selected={selectedRoles}
           onChange={setSelectedRoles}
+          responses={responses}
         />
       )}
 

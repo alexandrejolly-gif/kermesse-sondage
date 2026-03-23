@@ -20,29 +20,6 @@ export default function ResultsView({ cfg, responses }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: compact ? "0.5rem" : "1rem" }}>
-      <div
-        style={{
-          ...card(),
-          padding: compact ? "0.5rem 0.7rem" : "0.8rem 1rem",
-          display: "flex",
-          alignItems: "center",
-          gap: compact ? "0.4rem" : "0.6rem",
-          width: "fit-content",
-        }}
-      >
-        <span style={{ fontSize: compact ? "1rem" : "1.2rem" }}>👥</span>
-        <div>
-          <div style={{ fontSize: compact ? "1.05rem" : "1.3rem", fontWeight: 900, lineHeight: 1 }}>
-            {responses.length}
-          </div>
-          <div
-            style={{ fontSize: compact ? "0.62rem" : "0.7rem", color: T.muted, fontWeight: 600 }}
-          >
-            participant·e·s
-          </div>
-        </div>
-      </div>
-
       {/* Availability table */}
       <div style={{ ...card({ padding: 0 }), overflow: "hidden" }}>
         <div

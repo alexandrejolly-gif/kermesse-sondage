@@ -6,7 +6,6 @@ export default function Header({ cfg, view, setView, respCount }) {
   const tabs = [
     { id: "vote", label: "📝 Répondre" },
     { id: "results", label: `📊 Résultats${respCount > 0 ? ` (${respCount})` : ""}` },
-    { id: "admin", label: "⚙️ Admin" },
   ];
 
   const hasImage = !!cfg?.header_image;
@@ -72,7 +71,7 @@ export default function Header({ cfg, view, setView, respCount }) {
             {cfg.description}
           </p>
         )}
-        <nav style={{ display: "flex", gap: "0.15rem", overflowX: "auto" }}>
+        <nav style={{ display: "flex", gap: "0.15rem", overflowX: "auto", alignItems: "flex-end" }}>
           {tabs.map((t) => (
             <button
               key={t.id}
@@ -94,6 +93,24 @@ export default function Header({ cfg, view, setView, respCount }) {
               {t.label}
             </button>
           ))}
+          <div style={{ marginLeft: "auto" }}>
+            <button
+              onClick={() => setView("admin")}
+              style={{
+                padding: compact ? "0.25rem 0.45rem" : "0.38rem 0.6rem",
+                borderRadius: "7px 7px 0 0",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: T.font,
+                fontWeight: view === "admin" ? 900 : 600,
+                fontSize: compact ? "0.8rem" : "0.9rem",
+                background: view === "admin" ? T.bg : "rgba(255,255,255,0.22)",
+                color: view === "admin" ? T.primaryDk : "white",
+              }}
+            >
+              ⚙️
+            </button>
+          </div>
         </nav>
       </div>
     </header>

@@ -1,11 +1,13 @@
 import { T, card, useCompact } from "../styles/theme";
 
-export default function RolesSection({ roles, selected, onChange }) {
+export default function RolesSection({ roles, selected, onChange, responses }) {
   const compact = useCompact();
   const toggle = (id) =>
     onChange(
       selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id]
     );
+  const roleCnt = (rid) =>
+    (responses || []).filter((r) => (r.roles || []).includes(rid)).length;
 
   return (
     <div style={card(compact ? { padding: "0.65rem" } : {})}>
@@ -29,6 +31,7 @@ export default function RolesSection({ roles, selected, onChange }) {
       <div style={{ display: "flex", flexWrap: "wrap", gap: compact ? "0.35rem" : "0.5rem" }}>
         {roles.map((role) => {
           const on = selected.includes(role.id);
+          const count = roleCnt(role.id) + (on ? 1 : 0);
           return (
             <button
               key={role.id}
@@ -51,23 +54,13 @@ export default function RolesSection({ roles, selected, onChange }) {
             >
               {on && <span>✓</span>}
               {role.label}
+              <span style={{ fontSize: compact ? "0.62rem" : "0.72rem", color: on ? T.primary : T.hint, fontWeight: 700 }}>
+                ({count})
+              </span>
             </button>
           );
         })}
       </div>
-      {selected.length > 0 && (
-        <div
-          style={{
-            marginTop: compact ? "0.35rem" : "0.6rem",
-            fontSize: compact ? "0.68rem" : "0.76rem",
-            color: T.primary,
-            fontWeight: 700,
-          }}
-        >
-          {selected.length} rôle{selected.length > 1 ? "s" : ""} sélectionné
-          {selected.length > 1 ? "s" : ""}
-        </div>
-      )}
     </div>
   );
 }

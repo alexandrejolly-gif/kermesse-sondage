@@ -77,7 +77,7 @@ export default function ResultsView({ cfg, responses }) {
           <table
             style={{
               width: "100%",
-              borderCollapse: "collapse",
+              borderCollapse: "separate", borderSpacing: 0,
               fontSize: compact ? FS.sm : FS.md,
             }}
           >
@@ -290,7 +290,7 @@ export default function ResultsView({ cfg, responses }) {
             <table
               style={{
                 width: "100%",
-                borderCollapse: "collapse",
+                borderCollapse: "separate", borderSpacing: 0,
                 fontSize: compact ? FS.sm : FS.md,
               }}
             >

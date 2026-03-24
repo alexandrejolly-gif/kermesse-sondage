@@ -3,17 +3,37 @@ import { T, FS, FW, useCompact } from "../styles/theme";
 export default function Header({ cfg, view, setView, respCount }) {
   const compact = useCompact();
 
-  const tabs = [
+  const allTabs = [
     { id: "vote", label: "📝 Répondre" },
     { id: "results", label: `📊 Résultats${respCount > 0 ? ` (${respCount})` : ""}` },
+    { id: "admin", label: "⚙️", title: "Administration" },
   ];
 
   const hasImage = !!cfg?.header_image;
 
+  const tabStyle = (id) => {
+    const active = view === id;
+    return {
+      padding: compact ? "0.28rem 0.6rem" : "0.38rem 0.85rem",
+      borderRadius: 99,
+      border: "none",
+      cursor: "pointer",
+      fontFamily: T.font,
+      fontWeight: active ? FW.heavy : FW.medium,
+      fontSize: compact ? FS.sm : FS.md,
+      background: active ? "rgba(255,255,255,0.92)" : "transparent",
+      color: active ? T.primaryDk : "rgba(255,255,255,0.8)",
+      boxShadow: active ? "0 2px 8px rgba(0,0,0,0.1)" : "none",
+      transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+      whiteSpace: "nowrap",
+      flexShrink: 0,
+    };
+  };
+
   return (
     <header
       style={{
-        background: "linear-gradient(135deg, #F97316 0%, #FB923C 100%)",
+        background: "linear-gradient(135deg, #EA580C 0%, #F97316 50%, #FB923C 100%)",
         boxShadow: "0 4px 20px rgba(249,115,22,0.28)",
         position: "relative",
         overflow: "hidden",
@@ -36,7 +56,7 @@ export default function Header({ cfg, view, setView, respCount }) {
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(135deg, rgba(249,115,22,0.75) 0%, rgba(251,146,60,0.7) 100%)",
+            background: "linear-gradient(135deg, rgba(234,88,12,0.78) 0%, rgba(249,115,22,0.72) 50%, rgba(251,146,60,0.68) 100%)",
           }}
         />
       )}
@@ -44,7 +64,7 @@ export default function Header({ cfg, view, setView, respCount }) {
         style={{
           maxWidth: 960,
           margin: "0 auto",
-          padding: compact ? "0.6rem 0.7rem 0" : "1.1rem 1rem 0",
+          padding: compact ? "0.6rem 0.7rem 0.6rem" : "1.1rem 1rem 0.85rem",
           position: "relative",
           zIndex: 1,
         }}
@@ -72,47 +92,27 @@ export default function Header({ cfg, view, setView, respCount }) {
             {cfg.description}
           </p>
         )}
-        <nav style={{ display: "flex", gap: "0.15rem", overflowX: "auto", alignItems: "flex-end" }}>
-          {tabs.map((t) => (
+        <nav
+          style={{
+            display: "inline-flex",
+            gap: "0.2rem",
+            padding: "0.2rem",
+            background: "rgba(0,0,0,0.15)",
+            borderRadius: 99,
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+          }}
+        >
+          {allTabs.map((t) => (
             <button
               key={t.id}
               onClick={() => setView(t.id)}
-              style={{
-                padding: compact ? "0.25rem 0.55rem" : "0.38rem 0.85rem",
-                borderRadius: "7px 7px 0 0",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: T.font,
-                fontWeight: view === t.id ? FW.bold : FW.medium,
-                fontSize: compact ? FS.sm : FS.md,
-                background: view === t.id ? T.bg : "rgba(255,255,255,0.22)",
-                color: view === t.id ? T.primaryDk : "white",
-                whiteSpace: "nowrap",
-                flexShrink: 0,
-              }}
+              title={t.title}
+              style={tabStyle(t.id)}
             >
               {t.label}
             </button>
           ))}
-          <div style={{ marginLeft: "auto" }}>
-            <button
-              onClick={() => setView("admin")}
-              title="Administration"
-              style={{
-                padding: compact ? "0.25rem 0.45rem" : "0.38rem 0.6rem",
-                borderRadius: "7px 7px 0 0",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: T.font,
-                fontWeight: view === "admin" ? FW.bold : FW.medium,
-                fontSize: compact ? FS.sm : FS.md,
-                background: view === "admin" ? T.bg : "rgba(255,255,255,0.22)",
-                color: view === "admin" ? T.primaryDk : "white",
-              }}
-            >
-              ⚙️
-            </button>
-          </div>
         </nav>
       </div>
     </header>

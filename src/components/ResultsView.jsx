@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { T, FS, FW, card, optFor, useCompact } from "../styles/theme";
 
 function VoteIcon({ vote, size = 16 }) {
@@ -31,6 +31,13 @@ function VoteIcon({ vote, size = 16 }) {
 export default function ResultsView({ cfg, responses }) {
   const compact = useCompact();
   const [hoveredRow, setHoveredRow] = useState(null);
+  const headerRowRef = useRef(null);
+  const [headerH, setHeaderH] = useState(0);
+  const scrollable = responses.length > 10;
+
+  useEffect(() => {
+    if (headerRowRef.current) setHeaderH(headerRowRef.current.offsetHeight);
+  }, [responses.length, compact]);
 
   if (responses.length === 0)
     return (
@@ -66,7 +73,7 @@ export default function ResultsView({ cfg, responses }) {
         >
           📅 Disponibilités
         </div>
-        <div style={{ overflowX: "auto", maxHeight: compact ? 360 : 440, overflowY: "auto" }}>
+        <div style={{ overflowX: "auto", ...(scrollable && { maxHeight: compact ? 420 : 520, overflowY: "auto" }) }}>
           <table
             style={{
               width: "100%",
@@ -75,7 +82,7 @@ export default function ResultsView({ cfg, responses }) {
             }}
           >
             <thead>
-              <tr style={{ background: T.primaryBg, position: "sticky", top: 0, zIndex: 3 }}>
+              <tr ref={headerRowRef} style={{ background: T.primaryBg, ...(scrollable && { position: "sticky", top: 0, zIndex: 3 }) }}>
                 <th
                   style={{
                     padding: compact ? "0.45rem 0.5rem" : "0.7rem 1rem",
@@ -109,7 +116,7 @@ export default function ResultsView({ cfg, responses }) {
                   </th>
                 ))}
               </tr>
-              <tr style={{ background: "#FEF9C3" }}>
+              <tr style={{ background: "#FEF9C3", ...(scrollable && { position: "sticky", top: headerH, zIndex: 3 }) }}>
                 <td
                   style={{
                     padding: compact ? "0.22rem 0.5rem" : "0.32rem 1rem",
@@ -120,7 +127,7 @@ export default function ResultsView({ cfg, responses }) {
                     position: "sticky",
                     left: 0,
                     background: "#FEF9C3",
-                    zIndex: 1,
+                    zIndex: 4,
                   }}
                 >
                   ✓ Disponibles
@@ -279,7 +286,7 @@ export default function ResultsView({ cfg, responses }) {
               );
             })}
           </div>
-          <div style={{ overflowX: "auto", maxHeight: compact ? 360 : 440, overflowY: "auto" }}>
+          <div style={{ overflowX: "auto", ...(scrollable && { maxHeight: compact ? 420 : 520, overflowY: "auto" }) }}>
             <table
               style={{
                 width: "100%",
@@ -288,7 +295,7 @@ export default function ResultsView({ cfg, responses }) {
               }}
             >
               <thead>
-                <tr style={{ background: T.primaryBg, position: "sticky", top: 0, zIndex: 3 }}>
+                <tr style={{ background: T.primaryBg, ...(scrollable && { position: "sticky", top: 0, zIndex: 3 }) }}>
                   <th
                     style={{
                       padding: compact ? "0.4rem 0.5rem" : "0.65rem 1rem",

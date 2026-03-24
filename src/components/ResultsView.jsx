@@ -66,7 +66,7 @@ export default function ResultsView({ cfg, responses }) {
         >
           📅 Disponibilités
         </div>
-        <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto", maxHeight: compact ? 360 : 440, overflowY: "auto" }}>
           <table
             style={{
               width: "100%",
@@ -75,7 +75,7 @@ export default function ResultsView({ cfg, responses }) {
             }}
           >
             <thead>
-              <tr style={{ background: T.primaryBg }}>
+              <tr style={{ background: T.primaryBg, position: "sticky", top: 0, zIndex: 3 }}>
                 <th
                   style={{
                     padding: compact ? "0.45rem 0.5rem" : "0.7rem 1rem",
@@ -86,7 +86,7 @@ export default function ResultsView({ cfg, responses }) {
                     position: "sticky",
                     left: 0,
                     background: T.primaryBg,
-                    zIndex: 1,
+                    zIndex: 4,
                   }}
                 >
                   Participant·e
@@ -279,7 +279,7 @@ export default function ResultsView({ cfg, responses }) {
               );
             })}
           </div>
-          <div style={{ overflowX: "auto" }}>
+          <div style={{ overflowX: "auto", maxHeight: compact ? 360 : 440, overflowY: "auto" }}>
             <table
               style={{
                 width: "100%",
@@ -288,7 +288,7 @@ export default function ResultsView({ cfg, responses }) {
               }}
             >
               <thead>
-                <tr style={{ background: T.primaryBg }}>
+                <tr style={{ background: T.primaryBg, position: "sticky", top: 0, zIndex: 3 }}>
                   <th
                     style={{
                       padding: compact ? "0.4rem 0.5rem" : "0.65rem 1rem",
@@ -299,7 +299,7 @@ export default function ResultsView({ cfg, responses }) {
                       position: "sticky",
                       left: 0,
                       background: T.primaryBg,
-                      zIndex: 1,
+                      zIndex: 4,
                     }}
                   >
                     Participant·e

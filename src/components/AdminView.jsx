@@ -113,10 +113,10 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
     );
 
   const adminTabs = [
-    { id: "slots", label: "📅 Créneaux" },
-    { id: "roles", label: "🎭 Rôles" },
-    { id: "general", label: "⚙️ Général" },
-    { id: "responses", label: `👥 Réponses (${responses.length})` },
+    { id: "slots", label: compact ? "Créneaux" : "📅 Créneaux" },
+    { id: "roles", label: compact ? "Rôles" : "🎭 Rôles" },
+    { id: "general", label: compact ? "Général" : "⚙️ Général" },
+    { id: "responses", label: compact ? `Rép. (${responses.length})` : `👥 Réponses (${responses.length})` },
   ];
 
   return (

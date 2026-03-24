@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import SlotCol from "./SlotCol";
 import RolesSection from "./RolesSection";
-import { T, card, inputBase, lbl, errMsg, btn, uid, isEmail, useCompact } from "../styles/theme";
+import { T, FS, FW, card, inputBase, lbl, errMsg, btn, uid, isEmail, useCompact } from "../styles/theme";
 
 export default function VoteView({ cfg, responses, refreshResponses }) {
   const [name, setName] = useState("");
@@ -125,8 +125,8 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
         <div style={{ fontSize: "3rem", marginBottom: "0.6rem" }}>🎉</div>
         <h2
           style={{
-            fontSize: "1.25rem",
-            fontWeight: 900,
+            fontSize: FS.xl,
+            fontWeight: FW.heavy,
             color: T.primary,
             marginBottom: "0.4rem",
           }}
@@ -166,7 +166,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
           }}
         >
           <div>
-            <label style={{ ...lbl, fontSize: compact ? "0.62rem" : undefined }}>
+            <label style={lbl}>
               {compact ? "Prénom Nom Parent / Prénom enfant (Classe) *" : "Prénom et nom du parent / Prénom de l'enfant (Classe) *"}
             </label>
             <input
@@ -178,7 +178,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
             {errors.name && <p style={errMsg}>{errors.name}</p>}
           </div>
           <div>
-            <label style={{ ...lbl, fontSize: compact ? "0.62rem" : undefined }}>Email *</label>
+            <label style={lbl}>Email *</label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -189,7 +189,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
             />
             {errors.email && <p style={errMsg}>{errors.email}</p>}
             {editingId && (
-              <p style={{ color: "#059669", fontSize: compact ? "0.65rem" : "0.74rem", marginTop: "0.22rem", fontWeight: 700 }}>
+              <p style={{ color: "#059669", fontSize: compact ? FS.xs : FS.sm, marginTop: "0.22rem", fontWeight: FW.bold }}>
                 ✏️ Réponses retrouvées — modifiez et re-soumettez.
               </p>
             )}
@@ -203,26 +203,26 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: compact ? "0.35rem" : "0.55rem",
+            marginBottom: compact ? "0.35rem" : "0.5rem",
             flexWrap: "wrap",
             gap: "0.4rem",
           }}
         >
-          <span style={{ fontWeight: 900, fontSize: compact ? "0.82rem" : "0.92rem", color: T.text }}>
+          <span style={{ fontWeight: FW.bold, fontSize: compact ? FS.md : FS.lg, color: T.text }}>
             📅 Disponibilités
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
             {!compact && (
               <span
-                style={{ fontSize: "0.72rem", color: T.muted, fontWeight: 600 }}
+                style={{ fontSize: FS.sm, color: T.muted, fontWeight: FW.medium }}
               >
                 Sans réponse = Non
               </span>
             )}
             <span
               style={{
-                fontSize: "0.73rem",
-                fontWeight: 800,
+                fontSize: FS.sm,
+                fontWeight: FW.heavy,
                 color:
                   answeredCount === cfg.slots.length ? "#059669" : T.muted,
               }}
@@ -297,7 +297,7 @@ export default function VoteView({ cfg, responses, refreshResponses }) {
           width: "100%",
           justifyContent: "center",
           padding: compact ? "0.55rem" : "0.72rem",
-          fontSize: compact ? "0.8rem" : "0.9rem",
+          fontSize: compact ? FS.sm : undefined,
           borderRadius: 11,
           opacity: saving ? 0.7 : 1,
         }}

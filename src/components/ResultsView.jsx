@@ -1,4 +1,4 @@
-import { T, card, optFor, useCompact } from "../styles/theme";
+import { T, FS, FW, card, optFor, useCompact } from "../styles/theme";
 
 export default function ResultsView({ cfg, responses }) {
   const compact = useCompact();
@@ -7,7 +7,7 @@ export default function ResultsView({ cfg, responses }) {
     return (
       <div style={{ ...card(), textAlign: "center", padding: "2.5rem" }}>
         <div style={{ fontSize: "2.2rem", marginBottom: "0.6rem" }}>📭</div>
-        <p style={{ fontWeight: 700, color: T.muted }}>
+        <p style={{ fontWeight: FW.bold, color: T.muted }}>
           Aucune réponse pour l'instant.
         </p>
       </div>
@@ -26,8 +26,8 @@ export default function ResultsView({ cfg, responses }) {
           style={{
             padding: "0.65rem 1rem",
             borderBottom: `1px solid ${T.border}`,
-            fontWeight: 900,
-            fontSize: "0.88rem",
+            fontWeight: FW.bold,
+            fontSize: FS.lg,
           }}
         >
           📅 Disponibilités
@@ -37,7 +37,7 @@ export default function ResultsView({ cfg, responses }) {
             style={{
               width: "100%",
               borderCollapse: "collapse",
-              fontSize: compact ? "0.72rem" : "0.82rem",
+              fontSize: compact ? FS.sm : FS.md,
             }}
           >
             <thead>
@@ -46,7 +46,7 @@ export default function ResultsView({ cfg, responses }) {
                   style={{
                     padding: compact ? "0.45rem 0.5rem" : "0.7rem 1rem",
                     textAlign: "left",
-                    fontWeight: 900,
+                    fontWeight: FW.bold,
                     borderBottom: `1px solid ${T.border}`,
                     minWidth: compact ? 90 : 160,
                     position: "sticky",
@@ -63,11 +63,11 @@ export default function ResultsView({ cfg, responses }) {
                     style={{
                       padding: compact ? "0.35rem 0.25rem" : "0.55rem",
                       textAlign: "center",
-                      fontWeight: 800,
+                      fontWeight: FW.bold,
                       borderBottom: `1px solid ${T.border}`,
                       minWidth: compact ? 65 : 100,
                       borderLeft: `1px solid ${T.border}`,
-                      fontSize: compact ? "0.62rem" : "0.75rem",
+                      fontSize: compact ? FS.xs : FS.sm,
                     }}
                   >
                     <div>{s.label}</div>
@@ -79,8 +79,8 @@ export default function ResultsView({ cfg, responses }) {
                 <td
                   style={{
                     padding: compact ? "0.22rem 0.5rem" : "0.32rem 1rem",
-                    fontWeight: 700,
-                    fontSize: compact ? "0.62rem" : "0.73rem",
+                    fontWeight: FW.bold,
+                    fontSize: compact ? FS.xs : FS.sm,
                     color: T.muted,
                     borderBottom: `1px solid ${T.border}`,
                     position: "sticky",
@@ -105,10 +105,10 @@ export default function ResultsView({ cfg, responses }) {
                       style={{
                         background: "#D1FAE5",
                         color: "#065F46",
-                        fontWeight: 900,
+                        fontWeight: FW.heavy,
                         borderRadius: 99,
                         padding: compact ? "0.04rem 0.3rem" : "0.08rem 0.45rem",
-                        fontSize: compact ? "0.65rem" : "0.75rem",
+                        fontSize: compact ? FS.xs : FS.sm,
                       }}
                     >
                       {cnt(s.id, "oui")}
@@ -118,10 +118,10 @@ export default function ResultsView({ cfg, responses }) {
                         style={{
                           background: "#FEF3C7",
                           color: "#92400E",
-                          fontWeight: 800,
+                          fontWeight: FW.heavy,
                           borderRadius: 99,
                           padding: compact ? "0.04rem 0.28rem" : "0.08rem 0.4rem",
-                          fontSize: compact ? "0.6rem" : "0.72rem",
+                          fontSize: compact ? FS.xs : FS.sm,
                           marginLeft: 3,
                         }}
                       >
@@ -145,7 +145,7 @@ export default function ResultsView({ cfg, responses }) {
                     title={r.name}
                     style={{
                       padding: compact ? "0.35rem 0.5rem" : "0.6rem 1rem",
-                      fontWeight: 700,
+                      fontWeight: FW.bold,
                       position: "sticky",
                       left: 0,
                       background: i % 2 === 0 ? "white" : T.surfaceAlt,
@@ -174,10 +174,10 @@ export default function ResultsView({ cfg, responses }) {
                             style={{
                               background: opt.bg,
                               color: opt.col,
-                              fontWeight: 800,
+                              fontWeight: FW.heavy,
                               borderRadius: 5,
                               padding: compact ? "0.08rem 0.3rem" : "0.12rem 0.45rem",
-                              fontSize: compact ? "0.66rem" : "0.76rem",
+                              fontSize: compact ? FS.xs : FS.sm,
                               display: "inline-block",
                               border: opt.v === "peut" ? `1.5px dashed ${opt.border}` : "none",
                             }}
@@ -204,8 +204,8 @@ export default function ResultsView({ cfg, responses }) {
             style={{
               padding: "0.65rem 1rem",
               borderBottom: `1px solid ${T.border}`,
-              fontWeight: 900,
-              fontSize: "0.88rem",
+              fontWeight: FW.bold,
+              fontSize: FS.lg,
             }}
           >
             🎭 Préférences de rôles
@@ -236,8 +236,8 @@ export default function ResultsView({ cfg, responses }) {
                 >
                   <span
                     style={{
-                      fontWeight: 800,
-                      fontSize: compact ? "0.65rem" : "0.78rem",
+                      fontWeight: FW.heavy,
+                      fontSize: compact ? FS.xs : FS.sm,
                       color: n > 0 ? T.primaryDk : T.muted,
                     }}
                   >
@@ -245,8 +245,8 @@ export default function ResultsView({ cfg, responses }) {
                   </span>
                   <span
                     style={{
-                      fontWeight: 900,
-                      fontSize: compact ? "0.62rem" : "0.75rem",
+                      fontWeight: FW.heavy,
+                      fontSize: compact ? FS.xs : FS.sm,
                       background: n > 0 ? T.primary : T.border,
                       color: n > 0 ? "white" : T.muted,
                       borderRadius: 99,
@@ -266,7 +266,7 @@ export default function ResultsView({ cfg, responses }) {
               style={{
                 width: "100%",
                 borderCollapse: "collapse",
-                fontSize: compact ? "0.72rem" : "0.82rem",
+                fontSize: compact ? FS.sm : FS.md,
               }}
             >
               <thead>
@@ -275,7 +275,7 @@ export default function ResultsView({ cfg, responses }) {
                     style={{
                       padding: compact ? "0.4rem 0.5rem" : "0.65rem 1rem",
                       textAlign: "left",
-                      fontWeight: 900,
+                      fontWeight: FW.bold,
                       borderBottom: `1px solid ${T.border}`,
                       minWidth: compact ? 90 : 160,
                       position: "sticky",
@@ -292,11 +292,11 @@ export default function ResultsView({ cfg, responses }) {
                       style={{
                         padding: compact ? "0.35rem 0.25rem" : "0.55rem 0.5rem",
                         textAlign: "center",
-                        fontWeight: 800,
+                        fontWeight: FW.bold,
                         borderBottom: `1px solid ${T.border}`,
                         minWidth: compact ? 60 : 90,
                         borderLeft: `1px solid ${T.border}`,
-                        fontSize: compact ? "0.62rem" : "0.75rem",
+                        fontSize: compact ? FS.xs : FS.sm,
                       }}
                     >
                       {ro.label}
@@ -317,7 +317,7 @@ export default function ResultsView({ cfg, responses }) {
                       title={r.name}
                       style={{
                         padding: compact ? "0.35rem 0.5rem" : "0.55rem 1rem",
-                        fontWeight: 700,
+                        fontWeight: FW.bold,
                         position: "sticky",
                         left: 0,
                         background: i % 2 === 0 ? "white" : T.surfaceAlt,
@@ -342,7 +342,7 @@ export default function ResultsView({ cfg, responses }) {
                           }}
                         >
                           {on ? (
-                            <span style={{ color: "#059669", fontWeight: 900 }}>
+                            <span style={{ color: "#059669", fontWeight: FW.heavy }}>
                               ✓
                             </span>
                           ) : (

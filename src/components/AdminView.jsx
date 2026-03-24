@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import EditableItem from "./EditableItem";
 import {
   T,
+  FS,
+  FW,
   card,
   inputBase,
   lbl,
@@ -82,7 +84,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
     return (
       <div style={{ maxWidth: 400, margin: "2rem auto", ...card() }}>
         <h2
-          style={{ fontWeight: 900, fontSize: "1.05rem", marginBottom: "0.4rem" }}
+          style={{ fontWeight: FW.bold, fontSize: FS.lg, marginBottom: "0.4rem" }}
         >
           🔒 Administration
         </h2>
@@ -124,8 +126,8 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
           style={{
             background: "#D1FAE5",
             color: "#065F46",
-            fontWeight: 800,
-            fontSize: "0.82rem",
+            fontWeight: FW.heavy,
+            fontSize: FS.md,
             padding: "0.5rem 0.8rem",
             borderRadius: 9,
             marginBottom: "0.9rem",
@@ -150,7 +152,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
             style={{
               ...btn(T.primary, tab !== id),
               padding: compact ? "0.3rem 0.5rem" : undefined,
-              fontSize: compact ? "0.72rem" : undefined,
+              fontSize: compact ? FS.sm : undefined,
               borderColor: tab === id ? T.primary : T.border,
               background: tab === id ? T.primaryBg : "white",
               color: tab === id ? T.primaryDk : T.text,
@@ -167,9 +169,9 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
         <div style={card()}>
           <h3
             style={{
-              fontWeight: 900,
-              fontSize: "0.92rem",
-              marginBottom: "0.8rem",
+              fontWeight: FW.bold,
+              fontSize: FS.lg,
+              marginBottom: "0.5rem",
             }}
           >
             Créneaux horaires
@@ -186,7 +188,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
               <p
                 style={{
                   color: T.hint,
-                  fontSize: "0.83rem",
+                  fontSize: FS.md,
                   fontStyle: "italic",
                 }}
               >
@@ -275,9 +277,9 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
         <div style={card()}>
           <h3
             style={{
-              fontWeight: 900,
-              fontSize: "0.92rem",
-              marginBottom: "0.8rem",
+              fontWeight: FW.bold,
+              fontSize: FS.lg,
+              marginBottom: "0.5rem",
             }}
           >
             Rôles disponibles
@@ -294,7 +296,7 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
               <p
                 style={{
                   color: T.hint,
-                  fontSize: "0.83rem",
+                  fontSize: FS.md,
                   fontStyle: "italic",
                 }}
               >
@@ -357,9 +359,9 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
         <div style={card()}>
           <h3
             style={{
-              fontWeight: 900,
-              fontSize: "0.92rem",
-              marginBottom: "0.8rem",
+              fontWeight: FW.bold,
+              fontSize: FS.lg,
+              marginBottom: "0.5rem",
             }}
           >
             Paramètres généraux
@@ -473,11 +475,11 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
                         marginBottom: "0.1rem",
                       }}
                     >
-                      <span style={{ fontWeight: 800, fontSize: "0.88rem" }}>
+                      <span style={{ fontWeight: FW.heavy, fontSize: FS.md }}>
                         {r.name}
                       </span>
                       <span
-                        style={{ fontSize: "0.7rem", color: T.hint }}
+                        style={{ fontSize: FS.xs, color: T.hint }}
                       >
                         {r.email} ·{" "}
                         {new Date(r.created_at).toLocaleDateString("fr-FR")}
@@ -498,10 +500,10 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
                           <span
                             key={s.id}
                             style={{
-                              fontSize: "0.7rem",
+                              fontSize: FS.xs,
                               background: opt.bg,
                               color: opt.col,
-                              fontWeight: 800,
+                              fontWeight: FW.heavy,
                               borderRadius: 99,
                               padding: "0.06rem 0.42rem",
                             }}
@@ -529,10 +531,10 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
                             <span
                               key={rid}
                               style={{
-                                fontSize: "0.7rem",
+                                fontSize: FS.xs,
                                 background: T.primaryBg,
                                 color: T.primaryDk,
-                                fontWeight: 800,
+                                fontWeight: FW.heavy,
                                 borderRadius: 99,
                                 padding: "0.06rem 0.42rem",
                               }}

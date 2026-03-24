@@ -1,4 +1,4 @@
-import { T, useCompact } from "../styles/theme";
+import { T, FS, FW, useCompact } from "../styles/theme";
 
 export default function Header({ cfg, view, setView, respCount }) {
   const compact = useCompact();
@@ -51,8 +51,8 @@ export default function Header({ cfg, view, setView, respCount }) {
       >
         <h1
           style={{
-            fontSize: compact ? "1rem" : "clamp(1.15rem, 4vw, 1.5rem)",
-            fontWeight: 900,
+            fontSize: compact ? FS.lg : FS.xl,
+            fontWeight: FW.heavy,
             color: "white",
             lineHeight: 1.2,
             marginBottom: "0.2rem",
@@ -63,7 +63,8 @@ export default function Header({ cfg, view, setView, respCount }) {
         {cfg?.description && (
           <p
             style={{
-              fontSize: compact ? "0.68rem" : "0.8rem",
+              fontSize: compact ? FS.xs : FS.sm,
+              fontWeight: FW.medium,
               color: "rgba(255,255,255,0.85)",
               marginBottom: compact ? "0.5rem" : "0.75rem",
             }}
@@ -82,8 +83,8 @@ export default function Header({ cfg, view, setView, respCount }) {
                 border: "none",
                 cursor: "pointer",
                 fontFamily: T.font,
-                fontWeight: view === t.id ? 900 : 600,
-                fontSize: compact ? "0.7rem" : "0.8rem",
+                fontWeight: view === t.id ? FW.bold : FW.medium,
+                fontSize: compact ? FS.sm : FS.md,
                 background: view === t.id ? T.bg : "rgba(255,255,255,0.22)",
                 color: view === t.id ? T.primaryDk : "white",
                 whiteSpace: "nowrap",
@@ -103,8 +104,8 @@ export default function Header({ cfg, view, setView, respCount }) {
                 border: "none",
                 cursor: "pointer",
                 fontFamily: T.font,
-                fontWeight: view === "admin" ? 900 : 600,
-                fontSize: compact ? "0.8rem" : "0.9rem",
+                fontWeight: view === "admin" ? FW.bold : FW.medium,
+                fontSize: compact ? FS.sm : FS.md,
                 background: view === "admin" ? T.bg : "rgba(255,255,255,0.22)",
                 color: view === "admin" ? T.primaryDk : "white",
               }}

@@ -12,6 +12,21 @@ export function useCompact() {
   return compact;
 }
 
+export const FS = {
+  xs: "0.6875rem",   // 11px — labels uppercase, badges, hints
+  sm: "0.75rem",     // 12px — sous-titres, descriptions, méta
+  md: "0.875rem",    // 14px — corps de texte, boutons, contenu principal
+  lg: "1rem",        // 16px — titres de section
+  xl: "1.25rem",     // 20px — titre page (dans header)
+};
+
+export const FW = {
+  normal: 400,   // corps de texte courant
+  medium: 600,   // sous-titres, descriptions
+  bold: 700,     // titres de section, boutons
+  heavy: 800,    // titre principal header, chiffres importants
+};
+
 export const T = {
   bg: "#FFFBF0",
   surface: "#FFFFFF",
@@ -49,7 +64,7 @@ export const inputBase = (err) => ({
   borderRadius: 9,
   border: `1.5px solid ${err ? "#FCA5A5" : T.border}`,
   fontFamily: T.font,
-  fontSize: "0.86rem",
+  fontSize: FS.md,
   color: T.text,
   background: "white",
   outline: "none",
@@ -58,19 +73,19 @@ export const inputBase = (err) => ({
 
 export const lbl = {
   display: "block",
-  fontWeight: 700,
-  fontSize: "0.76rem",
+  fontWeight: FW.bold,
+  fontSize: FS.xs,
   color: T.muted,
-  marginBottom: "0.22rem",
+  marginBottom: "0.15rem",
   textTransform: "uppercase",
   letterSpacing: "0.04em",
 };
 
 export const errMsg = {
   color: "#DC2626",
-  fontSize: "0.74rem",
+  fontSize: FS.sm,
   marginTop: "0.22rem",
-  fontWeight: 700,
+  fontWeight: FW.bold,
 };
 
 export const btn = (bg = T.primary, light = false) => ({
@@ -80,9 +95,9 @@ export const btn = (bg = T.primary, light = false) => ({
   cursor: "pointer",
   background: light ? "white" : bg,
   color: light ? T.text : "white",
-  fontWeight: 800,
+  fontWeight: FW.bold,
   fontFamily: T.font,
-  fontSize: "0.83rem",
+  fontSize: FS.md,
   display: "inline-flex",
   alignItems: "center",
   gap: "0.28rem",
@@ -96,8 +111,8 @@ export const iconBtn = (color = T.muted) => ({
   padding: "0.22rem 0.42rem",
   cursor: "pointer",
   color,
-  fontWeight: 900,
-  fontSize: "0.82rem",
+  fontWeight: FW.heavy,
+  fontSize: FS.md,
   fontFamily: T.font,
   lineHeight: 1.2,
 });

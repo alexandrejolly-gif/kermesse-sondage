@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { T, inputBase, btn, iconBtn } from "../styles/theme";
+import { T, FS, FW, inputBase, btn, iconBtn } from "../styles/theme";
 
 export default function EditableItem({ item, onSave, onDelete, onMove, isFirst, isLast, fields }) {
   const [editing, setEditing] = useState(false);
@@ -99,8 +99,8 @@ export default function EditableItem({ item, onSave, onDelete, onMove, isFirst, 
         onClick={startEdit}
         style={{
           flex: 1,
-          fontWeight: 700,
-          fontSize: "0.85rem",
+          fontWeight: FW.bold,
+          fontSize: FS.md,
           color: T.text,
           cursor: "pointer",
           padding: "0.1rem 0.25rem",
@@ -114,7 +114,7 @@ export default function EditableItem({ item, onSave, onDelete, onMove, isFirst, 
       <span
         onClick={startEdit}
         style={{
-          fontSize: "0.7rem",
+          fontSize: FS.xs,
           color: T.hint,
           cursor: "pointer",
           marginRight: "0.25rem",

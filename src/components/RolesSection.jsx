@@ -1,4 +1,4 @@
-import { T, card, useCompact } from "../styles/theme";
+import { T, FS, FW, card, useCompact } from "../styles/theme";
 
 export default function RolesSection({ roles, selected, onChange, responses }) {
   const compact = useCompact();
@@ -11,17 +11,17 @@ export default function RolesSection({ roles, selected, onChange, responses }) {
 
   return (
     <div style={card(compact ? { padding: "0.65rem" } : {})}>
-      <div style={{ marginBottom: compact ? "0.4rem" : "0.75rem" }}>
-        <span style={{ fontWeight: 900, fontSize: compact ? "0.82rem" : "0.92rem", color: T.text }}>
+      <div style={{ marginBottom: compact ? "0.35rem" : "0.5rem" }}>
+        <span style={{ fontWeight: FW.bold, fontSize: compact ? FS.md : FS.lg, color: T.text }}>
           🎭 Préférences de rôles
         </span>
         {!compact && (
           <span
             style={{
               marginLeft: "0.5rem",
-              fontSize: "0.76rem",
+              fontSize: FS.sm,
               color: T.muted,
-              fontWeight: 600,
+              fontWeight: FW.medium,
             }}
           >
             · Cochez un ou plusieurs postes qui vous intéressent
@@ -42,8 +42,8 @@ export default function RolesSection({ roles, selected, onChange, responses }) {
                 border: `2px solid ${on ? T.primary : T.border}`,
                 background: on ? T.primaryBg : "white",
                 color: on ? T.primaryDk : T.muted,
-                fontWeight: on ? 900 : 600,
-                fontSize: compact ? "0.72rem" : "0.82rem",
+                fontWeight: on ? FW.bold : FW.medium,
+                fontSize: compact ? FS.sm : FS.md,
                 cursor: "pointer",
                 fontFamily: T.font,
                 transition: "all 0.12s",
@@ -54,7 +54,7 @@ export default function RolesSection({ roles, selected, onChange, responses }) {
             >
               {on && <span>✓</span>}
               {role.label}
-              <span style={{ fontSize: compact ? "0.62rem" : "0.72rem", color: on ? T.primary : T.hint, fontWeight: 700 }}>
+              <span style={{ fontSize: compact ? FS.xs : FS.sm, color: on ? T.primary : T.hint, fontWeight: FW.bold }}>
                 ({count})
               </span>
             </button>

@@ -1,7 +1,36 @@
+import { useState } from "react";
 import { T, FS, FW, card, optFor, useCompact } from "../styles/theme";
+
+function VoteIcon({ vote, size = 16 }) {
+  const opt = optFor(vote);
+  if (!opt) return <span style={{ color: T.hint }}>—</span>;
+
+  const strokeWidth = 2.5;
+  const paths = {
+    oui: <path d="M3 8.5L6.5 12L13 4" stroke={opt.col} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" fill="none" />,
+    peut: <path d="M3 8H13" stroke={opt.col} strokeWidth={strokeWidth} strokeLinecap="round" fill="none" />,
+    non: <><path d="M4 4L12 12" stroke={opt.col} strokeWidth={strokeWidth} strokeLinecap="round" fill="none" /><path d="M12 4L4 12" stroke={opt.col} strokeWidth={strokeWidth} strokeLinecap="round" fill="none" /></>,
+  };
+
+  return (
+    <span style={{
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: size + 12,
+      height: size + 12,
+      borderRadius: 6,
+      background: opt.bg,
+      border: opt.v === "peut" ? `1.5px dashed ${opt.border}` : "none",
+    }}>
+      <svg width={size} height={size} viewBox="0 0 16 16">{paths[vote]}</svg>
+    </span>
+  );
+}
 
 export default function ResultsView({ cfg, responses }) {
   const compact = useCompact();
+  const [hoveredRow, setHoveredRow] = useState(null);
 
   if (responses.length === 0)
     return (
@@ -17,6 +46,11 @@ export default function ResultsView({ cfg, responses }) {
     responses.filter((r) => r.votes[sid] === val).length;
   const roleCnt = (rid) =>
     responses.filter((r) => (r.roles || []).includes(rid)).length;
+
+  const rowBg = (id, i) =>
+    hoveredRow === id
+      ? T.primaryBg
+      : i % 2 === 0 ? "white" : T.surfaceAlt;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: compact ? "0.5rem" : "1rem" }}>
@@ -136,9 +170,12 @@ export default function ResultsView({ cfg, responses }) {
               {responses.map((r, i) => (
                 <tr
                   key={r.id}
+                  onMouseEnter={() => setHoveredRow(r.id)}
+                  onMouseLeave={() => setHoveredRow(null)}
                   style={{
-                    background: i % 2 === 0 ? "white" : T.surfaceAlt,
+                    background: rowBg(r.id, i),
                     borderBottom: `1px solid ${T.border}`,
+                    transition: "background 0.15s ease",
                   }}
                 >
                   <td
@@ -148,48 +185,29 @@ export default function ResultsView({ cfg, responses }) {
                       fontWeight: FW.bold,
                       position: "sticky",
                       left: 0,
-                      background: i % 2 === 0 ? "white" : T.surfaceAlt,
+                      background: rowBg(r.id, i),
                       zIndex: 1,
                       maxWidth: compact ? 110 : 200,
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
+                      transition: "background 0.15s ease",
                     }}
                   >
                     {r.name}
                   </td>
-                  {cfg.slots.map((s) => {
-                    const opt = optFor(r.votes[s.id]);
-                    return (
-                      <td
-                        key={s.id}
-                        style={{
-                          padding: compact ? "0.25rem 0.2rem" : "0.4rem 0.3rem",
-                          textAlign: "center",
-                          borderLeft: `1px solid ${T.border}`,
-                        }}
-                      >
-                        {opt ? (
-                          <span
-                            style={{
-                              background: opt.bg,
-                              color: opt.col,
-                              fontWeight: FW.heavy,
-                              borderRadius: 5,
-                              padding: compact ? "0.08rem 0.3rem" : "0.12rem 0.45rem",
-                              fontSize: compact ? FS.xs : FS.sm,
-                              display: "inline-block",
-                              border: opt.v === "peut" ? `1.5px dashed ${opt.border}` : "none",
-                            }}
-                          >
-                            {opt.v === "peut" ? "~" : opt.icon}
-                          </span>
-                        ) : (
-                          <span style={{ color: T.hint }}>—</span>
-                        )}
-                      </td>
-                    );
-                  })}
+                  {cfg.slots.map((s) => (
+                    <td
+                      key={s.id}
+                      style={{
+                        padding: compact ? "0.25rem 0.2rem" : "0.4rem 0.3rem",
+                        textAlign: "center",
+                        borderLeft: `1px solid ${T.border}`,
+                      }}
+                    >
+                      <VoteIcon vote={r.votes[s.id]} size={compact ? 14 : 16} />
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
@@ -308,9 +326,12 @@ export default function ResultsView({ cfg, responses }) {
                 {responses.map((r, i) => (
                   <tr
                     key={r.id}
+                    onMouseEnter={() => setHoveredRow(r.id)}
+                    onMouseLeave={() => setHoveredRow(null)}
                     style={{
-                      background: i % 2 === 0 ? "white" : T.surfaceAlt,
+                      background: rowBg(r.id, i),
                       borderBottom: `1px solid ${T.border}`,
+                      transition: "background 0.15s ease",
                     }}
                   >
                     <td
@@ -320,12 +341,13 @@ export default function ResultsView({ cfg, responses }) {
                         fontWeight: FW.bold,
                         position: "sticky",
                         left: 0,
-                        background: i % 2 === 0 ? "white" : T.surfaceAlt,
+                        background: rowBg(r.id, i),
                         zIndex: 1,
                         maxWidth: compact ? 110 : 200,
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
+                        transition: "background 0.15s ease",
                       }}
                     >
                       {r.name}
@@ -342,11 +364,17 @@ export default function ResultsView({ cfg, responses }) {
                           }}
                         >
                           {on ? (
-                            <span style={{ color: "#059669", fontWeight: FW.heavy }}>
-                              ✓
+                            <span style={{
+                              display: "inline-flex", alignItems: "center", justifyContent: "center",
+                              width: compact ? 22 : 26, height: compact ? 22 : 26,
+                              borderRadius: 6, background: "#D1FAE5",
+                            }}>
+                              <svg width={compact ? 12 : 14} height={compact ? 12 : 14} viewBox="0 0 16 16">
+                                <path d="M3 8.5L6.5 12L13 4" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                              </svg>
                             </span>
                           ) : (
-                            <span style={{ color: T.border }}>—</span>
+                            <span style={{ color: T.hint, fontSize: compact ? "0.7rem" : "0.82rem" }}>—</span>
                           )}
                         </td>
                       );

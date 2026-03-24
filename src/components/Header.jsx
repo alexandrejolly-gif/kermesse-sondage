@@ -70,12 +70,14 @@ export default function Header({ cfg, view, setView, respCount }) {
         }}
       >
         <h1
+          onClick={() => setView("vote")}
           style={{
             fontSize: compact ? FS.lg : FS.xl,
             fontWeight: FW.heavy,
             color: "white",
             lineHeight: 1.2,
             marginBottom: "0.2rem",
+            cursor: "pointer",
           }}
         >
           {cfg?.icon || "🎪"} {cfg?.title}

@@ -139,29 +139,40 @@ export default function AdminView({ cfg, responses, saveCfg, deleteResponse, res
       <div
         style={{
           display: "flex",
-          gap: compact ? "0.2rem" : "0.35rem",
+          flexWrap: "wrap",
+          gap: compact ? "0.3rem" : "0.4rem",
           marginBottom: compact ? "0.6rem" : "1rem",
-          overflowX: "auto",
-          paddingBottom: "0.2rem",
+          padding: compact ? "0.25rem" : "0.3rem",
+          background: T.surfaceAlt,
+          borderRadius: 10,
+          border: `1px solid ${T.border}`,
         }}
       >
-        {adminTabs.map(({ id, label: l2 }) => (
-          <button
-            key={id}
-            onClick={() => setTab(id)}
-            style={{
-              ...btn(T.primary, tab !== id),
-              padding: compact ? "0.3rem 0.5rem" : undefined,
-              fontSize: compact ? FS.sm : undefined,
-              borderColor: tab === id ? T.primary : T.border,
-              background: tab === id ? T.primaryBg : "white",
-              color: tab === id ? T.primaryDk : T.text,
-              flexShrink: 0,
-            }}
-          >
-            {l2}
-          </button>
-        ))}
+        {adminTabs.map(({ id, label: l2 }) => {
+          const active = tab === id;
+          return (
+            <button
+              key={id}
+              onClick={() => setTab(id)}
+              style={{
+                padding: compact ? "0.32rem 0.55rem" : "0.42rem 0.85rem",
+                borderRadius: 8,
+                border: "none",
+                cursor: "pointer",
+                fontFamily: T.font,
+                fontWeight: active ? FW.heavy : FW.medium,
+                fontSize: compact ? FS.sm : FS.md,
+                background: active ? "white" : "transparent",
+                color: active ? T.primaryDk : T.muted,
+                boxShadow: active ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
+                transition: "all 0.2s ease",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {l2}
+            </button>
+          );
+        })}
       </div>
 
       {/* Slots tab */}

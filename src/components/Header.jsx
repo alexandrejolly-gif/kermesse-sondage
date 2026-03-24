@@ -13,16 +13,20 @@ export default function Header({ cfg, view, setView, respCount }) {
 
   const tabStyle = (id) => {
     const active = view === id;
+    const isAdmin = id === "admin";
     return {
-      padding: compact ? "0.28rem 0.6rem" : "0.38rem 0.85rem",
+      padding: isAdmin
+        ? (compact ? "0.28rem 0.45rem" : "0.38rem 0.55rem")
+        : (compact ? "0.28rem 0.6rem" : "0.38rem 0.85rem"),
       borderRadius: 99,
       border: "none",
       cursor: "pointer",
       fontFamily: T.font,
       fontWeight: active ? FW.heavy : FW.medium,
       fontSize: compact ? FS.sm : FS.md,
-      background: active ? "rgba(255,255,255,0.92)" : "transparent",
-      color: active ? T.primaryDk : "rgba(255,255,255,0.8)",
+      background: active ? "rgba(255,255,255,0.92)"
+        : isAdmin ? "rgba(255,255,255,0.2)" : "transparent",
+      color: active ? T.primaryDk : "white",
       boxShadow: active ? "0 2px 8px rgba(0,0,0,0.1)" : "none",
       transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
       whiteSpace: "nowrap",

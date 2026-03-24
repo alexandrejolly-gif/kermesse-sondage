@@ -73,7 +73,7 @@ export default function ResultsView({ cfg, responses }) {
         >
           📅 Disponibilités
         </div>
-        <div style={{ overflowX: "auto", ...(scrollable && { maxHeight: compact ? 420 : 520, overflowY: "auto" }) }}>
+        <div style={{ overflowX: "auto", ...(scrollable && { maxHeight: compact ? 370 : 460, overflowY: "auto" }) }}>
           <table
             style={{
               width: "100%",
@@ -286,7 +286,7 @@ export default function ResultsView({ cfg, responses }) {
               );
             })}
           </div>
-          <div style={{ overflowX: "auto", ...(scrollable && { maxHeight: compact ? 420 : 520, overflowY: "auto" }) }}>
+          <div style={{ overflowX: "auto", ...(scrollable && { maxHeight: compact ? 370 : 460, overflowY: "auto" }) }}>
             <table
               style={{
                 width: "100%",
